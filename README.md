@@ -16,6 +16,35 @@ oracle-edition-based-redefinition-lab/
 └── docs/   -- fundamentals, lab setup, interview discussion points
 ```
 
+## Scripts and templates
+
+| File | What it does |
+|---|---|
+| `sql/ebr_lab_setup_v1.sql` | Builds version 1 of the lab: the V1 edition, the editions-enabled LAB_APP schema, the customers and orders tables, the editioned view and package, and seed data; run as SYSDBA in a scratch database |
+| `sql/edition_inventory.sql` | Read-only edition layout report: session and database default editions, every edition, editions-enabled users, editioned and noneditioned lab objects; exit 2 when the layout does not match the design |
+
+Build the lab (replace the placeholder lab password in the setup script first):
+
+```
+sqlplus / as sysdba @sql/ebr_lab_setup_v1.sql
+```
+
+Verify the build:
+
+```
+sqlplus / as sysdba @sql/edition_inventory.sql
+```
+
+## Docs
+
+| Doc | What it covers |
+|---|---|
+| `docs/ebr-fundamentals.md` | Editions, editioned versus noneditioned objects, session and default editions, edition inheritance, what EBR does not do, versions and licensing |
+| `docs/lab-setup.md` | Prerequisites, building and verifying version 1, trying the edition mechanics by hand, tearing the lab down, and what the later stages add |
+| `docs/interview-discussion-points.md` | The answers this lab is built to support in a conversation with a senior DBA or hiring manager |
+
+Start with `docs/ebr-fundamentals.md` if EBR is new. Start with `docs/lab-setup.md` if you want to build the lab first and read as you go.
+
 ## Assumptions
 
 - Oracle Database 11g Release 2 or later for editions and editioned PL/SQL. Editioning views and crossedition triggers, covered in later stages of this lab, need Oracle Database 12c Release 1 or later.
